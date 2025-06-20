@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "DominiqueSiteAuteure": {
+    "SiteClient": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -23,12 +23,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -58,10 +53,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "DominiqueSiteAuteure:build:production"
+              "buildTarget": "SiteClient:build:production"
             },
             "development": {
-              "buildTarget": "DominiqueSiteAuteure:build:development"
+              "buildTarget": "SiteClient:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,6 +83,6 @@
     }
   },
   "cli": {
-    "analytics": "798d250e-3d9c-43a3-9229-02ca0c4898b5"
+    "analytics": false
   }
 }
