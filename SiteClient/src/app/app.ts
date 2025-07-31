@@ -1,15 +1,17 @@
 import { ApplicationConfig, Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { firebaseConfig } from './environment/firebaseConfig'; // Adjust the path if needed
 import { DataService } from './services/dataService'; // Adjust the path if needed
+import { routes } from './app.routes';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideRouter(routes) // <-- ajoute cette ligne
   ]
 }
 @Component({
@@ -23,13 +25,18 @@ export class App implements OnInit { // <-- Implémente OnInit
   protected title = 'DominiqueSiteAuteure';
   livres: any[] = [];
 
-  constructor(private dataService: DataService) {} // <-- Injecte le service
+  constructor(private dataService: DataService) { } // <-- Injecte le service
 
   ngOnInit() {
+
+  }
+  getLivres() {
     this.dataService.getLivres().subscribe((livres: any[]) => {
       this.livres = livres;
-      // Tu peux faire un console.log pour vérifier
-      console.log(this.livres);
+
+      this.livres.forEach(livre => console.log(livre.Titre));
+      console.log('Livres chargés:', this.livres.length);
     });
+
   }
 }
